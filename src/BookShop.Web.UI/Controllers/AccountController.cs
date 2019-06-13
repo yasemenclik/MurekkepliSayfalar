@@ -25,8 +25,51 @@ namespace BookShop.Web.UI.Controllers
             return View();
         }
 
-     
-            public IActionResult Register()
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            // 1- gelen modeli dogrula
+            if (ModelState.IsValid)
+            {
+                // 1.1- Bu kullanici adina kayitli kullanici var mi bak
+                var existUser = await _userManager.FindByEmailAsync(model.Username);
+
+                // 1.2- Yoksa hata don
+                if (existUser == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Boyle bir kullanici adi sistmemize kayitli degil!");
+                    return View(model);
+                }
+                // 1.3- Kullanici adi ve sifre eslesmesi | eslestiyse giris yap
+                var login = await _signInManager.PasswordSignInAsync(model.Username, model.Password, true, lockoutOnFailure: false);
+                // 1.4- Eslesmediyse hata don
+                if (!login.Succeeded)
+                {
+                    ModelState.AddModelError(string.Empty, "Şifreniz yanlış!");
+                    return View(model);
+                }
+                // 1.5- Giriş başarılı ise iletişime gönder
+                return RedirectToAction("Contact", "Home");
+            }
+            // 2- Model hataliysa view'a gonder
+            return View(model);
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Register()
         {
             return View();
         }
@@ -48,6 +91,8 @@ namespace BookShop.Web.UI.Controllers
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
+                    
+
                     EmailConfirmed = true,
                     TwoFactorEnabled = false
                 };

@@ -1,4 +1,10 @@
-﻿<html lang="tr">
+﻿@model BookShop.Web.UI.Models.AccountViewModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<!doctype html>
+<html lang="tr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,6 +20,7 @@
 
 
     <style>
+
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -41,90 +48,55 @@
         </div>
 
         <div class="row">
-
             <div class="col-md-12">
                 <h4 class="mb-3">Kullanıcı Bilgileri</h4>
-                <form class="needs-validation" novalidate>
+                <form class="needs-validation" novalidate method="post" asp-action="Register">
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="firstName">İsim</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                Valid first name is required.
-                            </div>
+                            <label asp-for="FirstName"></label>
+                            <input asp-for="FirstName" class="form-control">
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="lastName">Soyisim</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                Valid last name is required.
-                            </div>
+                            <label asp-for="LastName"></label>
+                            <input asp-for="LastName" class="form-control">
+                            <span asp-validation-for="LastName" class="text-danger"></span>
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="username">Kullanıcı Adı</label>
+                        <label asp-for="UserName"></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"></span>
                             </div>
-                            <input type="text" class="form-control" id="username" placeholder="Kullanıcı Adı" required>
-                            <div class="invalid-feedback" style="width: 100%;">
-                                Your username is required.
-                            </div>
+                            <input asp-for="UserName" class="form-control">
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="you@gmail.com">
-                        <div class="invalid-feedback">
-                            Please enter a valid email address for shipping updates.
-                        </div>
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control">
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="address">Adres</label>
-                        <input type="text" class="form-control" id="address" placeholder="1234. Cadde" required>
-                        <div class="invalid-feedback">
-                            Please enter your shipping address.
-                        </div>
+                    <div class="form-group">
+                        <label asp-for="Password"></label>
+                        <input asp-for="Password" class="form-control">
+                        <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="address2">Adres 2 <span class="text-muted">(Optional)</span></label>
-                        <input type="text" class="form-control" id="address2" placeholder="Apartman veya Daire">
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword"></label>
+                        <input asp-for="ConfirmPassword" class="form-control">
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-5 mb-3">
-                            <label for="country">Ülke</label>
-                            <select class="custom-select d-block w-100" id="country" required>
-                                <option value="">Seçiniz...</option>
-                                <option>Türkiye</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please select a valid country.
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="state">Şehir</label>
-                            <select class="custom-select d-block w-100" id="state" required>
-                                <option value="">Seçiniz...</option>
-                                <option>İstanbul</option>
-                                <option>Ankara</option>
-                                <option>İzmir</option>
-                                <option>Bursa</option>
-                                <option>Adana</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please provide a valid state.
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <hr class="mb-4">
-                    
+                
+
+                  
                     <hr class="mb-4">
 
                     <h4 class="mb-3">Ödeme</h4>
@@ -145,49 +117,38 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="cc-name">Kart Üzerindeki İsim</label>
-                            <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                            
-                            <div class="invalid-feedback">
-                                Name on card is required
-                            </div>
+                            <label asp-for="CardUserName"></label>
+                            <input asp-for="CardUserName" class="form-control">
+
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="cc-number">Kart Numarası</label>
-                            <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                            
+                            <label asp-for="CardNumber"></label>
+                            <input asp-for="CardNumber" class="form-control">
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3 mb-3">
-                            <label for="cc-expiration">Son Kullanım Tarihi</label>
-                            <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                            
+                            <label asp-for="ExpirationDate"></label>
+                            <input asp-for="ExpirationDate" class="form-control">
+
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="cc-cvv">CVV</label>
-                            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                            
+                            <label asp-for="Security"></label>
+                            <input asp-for="Security" class="form-control">
+
                         </div>
                     </div>
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Kayıt Ol!</button>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Kayıt Ol</button>
                 </form>
             </div>
         </div>
 
-        <footer class="my-5 pt-5 text-muted text-center text-small">
-            <p class="mb-1">&copy; 2017-2019 Company Name</p>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Privacy</a></li>
-                <li class="list-inline-item"><a href="#">Terms</a></li>
-                <li class="list-inline-item"><a href="#">Support</a></li>
-            </ul>
-        </footer>
+
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
-    <script src="form-validation.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    <script src="~/js/form-validation.js"></script>
 </body>
 </html>

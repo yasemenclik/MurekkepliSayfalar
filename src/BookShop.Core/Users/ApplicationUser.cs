@@ -15,5 +15,7 @@ namespace BookShop.Core.Users
         [MaxLength(30)]
         public string LastName { get; set; }
 
+
+
     }
 }
