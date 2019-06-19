@@ -18,8 +18,4 @@
     <ProjectReference Include="..\BookShop.Core\BookShop.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

@@ -11,7 +11,7 @@
                 <div id="login-box" class="col-md-12">
                     <form asp-action="Login" method="post">
                         <div asp-validation-summary="All" class="text-danger"></div>
-                        <h3 class="text-center text-info">Login</h3>
+                        <h3 class="text-center text-info">Giriş Yap</h3>
                         <div class="form-group">
                             <label asp-for="Username" class="text-info"></label><br>
                             <input asp-for="Username" class="form-control">
@@ -23,7 +23,7 @@
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                            <label for="remember-me" class="text-info"><span>Beni Hatırla</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
                             <input type="submit" name="submit" class="btn btn-info btn-md" value="Giriş">
                         </div>
                         <div id="register-link" class="text-right">

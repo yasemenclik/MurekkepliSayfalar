@@ -15,6 +15,17 @@ namespace BookShop.Core.Users
         [MaxLength(30)]
         public string LastName { get; set; }
 
+        // [Required] : Adres ilk etapta zorunlu tutulmadığı için bu tabı yorum satırı olarak ekledik.
+        
+        public string Address { get; set; }
+
+        // [Required] : Ülke ilk etapta zorunlu tutulmadığı için bu tabı yorum satırı olarak ekledik.
+        
+        public string Country { get; set; }
+
+        // [Required] : Şehir ilk etapta zorunlu tutulmadığı için bu tabı yorum satırı olarak ekledik.
+        
+        public string State { get; set; }
 
 
     }

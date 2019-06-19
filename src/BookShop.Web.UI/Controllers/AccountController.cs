@@ -30,10 +30,16 @@ namespace BookShop.Web.UI.Controllers
             return View();
         }
 
+        public IActionResult Register()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            //Async kullanmamızın sebebi metoda tamamen baksın diye kullanıldı.
             // 1- gelen modeli dogrula
             if (ModelState.IsValid)
             {
@@ -43,24 +49,29 @@ namespace BookShop.Web.UI.Controllers
                 // 1.2- Yoksa hata don
                 if (existUser == null)
                 {
-                    ModelState.AddModelError(string.Empty, "Boyle bir kullanici adi sistmemize kayitli degil!");
-                    return View(model);
+                    ModelState.AddModelError(string.Empty, "Böyle bir kullanıcı adı sistemimizde kayıtlı değil!");
+                    return View();
+
                 }
-                // 1.3- Kullanici adi ve sifre eslesmesi | eslestiyse giris yap
+
+                // 1.3- Kullanici adi ve sifre eslesmesi | Eşleştiyse giriş yap
                 var login = await _signInManager.PasswordSignInAsync(model.Username, model.Password, true, lockoutOnFailure: false);
+
                 // 1.4- Eslesmediyse hata don
                 if (!login.Succeeded)
                 {
-                    ModelState.AddModelError(string.Empty, "Şifreniz yanlış!");
-                    return View(model);
+                    ModelState.AddModelError(string.Empty, "Şifreniz Yanlış");
+                    return View();
                 }
                 // 1.5- Giriş başarılı ise iletişime gönder
-                return RedirectToAction("Contact", "Home");
+                return RedirectToAction("Index", "Home");
             }
-            // 2- Model hataliysa view'a gonder
+
+            // 2- Model hataliysa hatalariyla beraber view'a gonder
             return View(model);
 
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
@@ -69,20 +80,14 @@ namespace BookShop.Web.UI.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult Register()
-        {
-            return View();
-        }
-
+        //Veritabanına veri ekleyeceğimiz için HttpPost yazıyoruz.
+        //Veriyi eşzamanlı olarak (async) getirmesini sağlıyoruz.
+        //ValidateAntiForgeryToken; kendisine gönderilen AntiForgeryToken’ı decrypt işleminden geçirerek, validation işlemlerini gerçekleştirmektedir.Eğer validation işlemlerinden geçemezse bu noktada exception’a düşmektedir.
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-        // Veritabanına veri ekleyeceğimiz için HttpPost yazıyoruz.
-        // Veriyi eş zamanlı olarak (async) getirmesini sağlıyoruz.
-        // ValidateAntiForgeryToken; kendisine gönderilen AntiForgeryToken’ı decrypt işleminden geçirerek, validation işlemlerini gerçekleştirmektedir.Eğer validation işlemlerinden geçemezse bu noktada exception’a düşmektedir.
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            // kayıt etme işlemleri
+            //kayıt işlemleri
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
@@ -91,8 +96,9 @@ namespace BookShop.Web.UI.Controllers
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    
-
+                    Address = model.Address,
+                    State = model.State,
+                    Country = model.Country,
                     EmailConfirmed = true,
                     TwoFactorEnabled = false
                 };
@@ -101,13 +107,14 @@ namespace BookShop.Web.UI.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
 
             return View(model);
         }
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var err in result.Errors)
@@ -115,6 +122,7 @@ namespace BookShop.Web.UI.Controllers
                 ModelState.AddModelError(string.Empty, err.Description);
             }
         }
+
 
     }
 }
