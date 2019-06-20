@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookShop.EntityFramework.Migrations
 {
     [DbContext(typeof(ApplicationUserDbContext))]
-    [Migration("20190619134559_CreateBooksModel")]
+    [Migration("20190620110841_CreateBooksModel")]
     partial class CreateBooksModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,8 @@ namespace BookShop.EntityFramework.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("BookId");
+
                     b.Property<int>("BookListId");
 
                     b.Property<DateTime>("CreatedDate");
@@ -54,16 +56,11 @@ namespace BookShop.EntityFramework.Migrations
                     b.Property<string>("CreatorUserId")
                         .IsRequired();
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(300);
-
                     b.Property<bool>("IsCompleted");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
-
                     b.HasKey("Id");
+
+                    b.HasIndex("BookId");
 
                     b.HasIndex("BookListId");
 
@@ -273,6 +270,11 @@ namespace BookShop.EntityFramework.Migrations
 
             modelBuilder.Entity("BookShop.Core.Book.BookListItem", b =>
                 {
+                    b.HasOne("BookShop.Core.Book.Books", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("BookShop.Core.Book.BookList", "BookList")
                         .WithMany("BookListItems")
                         .HasForeignKey("BookListId")

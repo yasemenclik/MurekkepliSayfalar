@@ -10,13 +10,10 @@ namespace BookShop.Core.Book
     {
         public int Id { get; set; }
 
-        [Required]
-        public string Name { get; set; }
-
-        [Required]
-        [MaxLength(300)]
-        public string Description { get; set; }
-
+        [ForeignKey("BookId")]
+        public virtual Books Book { get; set; }
+        public virtual int BookId { get; set; }
+        
         public bool IsCompleted { get; set; } = false;
 
         [ForeignKey("BookListId")]
@@ -27,12 +24,11 @@ namespace BookShop.Core.Book
         public string CreatorUserId { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public static BookListItem Create(string name, string description, int bookListId, string creatorUserId)
+        public static BookListItem Create(int bookId, int bookListId, string creatorUserId)
         {
             return new BookListItem
             {
-                Name = name,
-                Description = description,
+                BookId = bookId,
                 BookListId = bookListId,
                 CreatorUserId = creatorUserId,
                 CreatedDate = DateTime.Now,
