@@ -1,113 +1,183 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using BookShop.Core.Users
-
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
-
-<!doctype html>
+﻿
+<!DOCTYPE html>
 <html lang="tr">
+
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="Elif Kantar - Yasemen Çelik - Gizem Kılıç">
-    <meta name="generator" content="BookShop">
-    <title>Book Shop</title>
+    <meta name="author" content="">
 
-    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Agency - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/lib/@@fortawesome/fontawesome-free-webfonts/css/all.min.css" rel="stylesheet" type="text/css">
 
 
-    <style>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @@media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
     <!-- Custom styles for this template -->
-    <link href="~/css/carousel.css" rel="stylesheet">
+    <link href="~/css/agency.min.css" rel="stylesheet">
+
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <img class="d-block mx-auto mb-4" src="~/img/book-shop.png" alt="" width="62" height="62">
-            <a class="navbar-brand" href="#">&nbsp;&nbsp; Book Shop</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+
+<body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            @*<img class="d-block mx-auto mb-4 mt-2" src="~/img/studying.png" alt="" width="50" height="50">*@
+            <a class="navbar-brand js-scroll-trigger ml-2" href="#page-top">Mürekkepli Sayfalar</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
             </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto">
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Kitap<span class="sr-only">(current)</span></a>
+                        <a class="nav-link js-scroll-trigger" href="#services">Hizmetlerimiz</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">E-Kitap</a>
+                        <a class="nav-link js-scroll-trigger" href="#portfolio">Kategoriler</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sesli Kitap</a>
+                        <a class="nav-link js-scroll-trigger" href="#about">Hakkımızda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Kırtasiye</a>
+                        <a class="nav-link js-scroll-trigger" href="#team">Biz Kimiz?</a>
                     </li>
+                    @*<li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                    </li>*@
                 </ul>
-                <form class="form-inline col-md-5 mt-2 mt-md-0">
-                    <input class="form-control col-7 mr-sm-4" type="text" placeholder="Hangi ürünü arıyorsunuz?" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ara</button>
-                </form>
+            </div>
+        </div>
+    </nav>
+    @RenderBody()
 
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <span>Merhaba @User.Identity.Name</span> &nbsp; &nbsp;
-                            </li>
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-                            <li>
-                                <button type="submit" class="btn btn-danger navbar-btn navbar-link">Çıkış</button>
-                            </li>
-                        </ul>
-                    </form>
+    <!-- Plugin JavaScript -->
+    <script src="~/js/jquery.easing.min.js"></script>
 
+    <!-- Contact form JavaScript -->
+    <script src="~/js/BootstrapValidation.js"></script>
+
+    <script src="~/js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="~/js/agency.min.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+@*
+    @using Microsoft.AspNetCore.Identity
+    @using BookShop.Core.Users
+    @inject SignInManager<ApplicationUser> SignInManager
+    @inject UserManager<ApplicationUser> UserManager
+    <!doctype html>
+    <html lang="tr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="Elif Kantar - Yasemen Çelik - Gizem Kılıç">
+        <meta name="generator" content="BookShop">
+        <title>Book Shop</title>
+        <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <style>
+            .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+            @@media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                    font-size: 3.5rem;
                 }
-                else
-                {
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="pr-2">
-                            <a class="btn btn-outline-primary" asp-action="Login" asp-controller="Account">Giriş</a>
+            }
+        </style>
+        <!-- Custom styles for this template -->
+        <link href="~/css/carousel.css" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <img class="d-block mx-auto mb-4" src="~/img/book-shop.png" alt="" width="62" height="62">
+                <a class="navbar-brand" href="#">&nbsp;&nbsp; Book Shop</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Kitap<span class="sr-only">(current)</span></a>
                         </li>
-                        <li>
-                            <a class="btn btn-outline-primary" asp-action="Register" asp-controller="Account">Kayıt ol</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">E-Kitap</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Sesli Kitap</a>
                         </li>
                     </ul>
-                }
-            </div>
-        </nav>
-    </header>
-
-
-    <main role="main" class="center">
-
-
-        @RenderBody()
-
-
-        <!-- FOOTER -->
-        <footer class="container">
-            <br />
-        </footer>
-    </main>
-    <script src="~/lib/jquery/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
-</body>
-</html>
+                    <form class="form-inline col-md-5 mt-2 mt-md-0">
+                        <input class="form-control col-7 mr-sm-4" type="text" placeholder="Hangi ürünü arıyorsunuz?" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ara</button>
+                    </form>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <span>Merhaba @User.Identity.Name</span> &nbsp; &nbsp;
+                                </li>
+                                <li>
+                                    <button type="submit" class="btn btn-danger navbar-btn navbar-link">Çıkış</button>
+                                </li>
+                            </ul>
+                        </form>
+                    }
+                    else
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="pr-2">
+                                <a class="btn btn-outline-primary" asp-action="Login" asp-controller="Account">Giriş</a>
+                            </li>
+                            <li>
+                                <a class="btn btn-outline-primary" asp-action="Register" asp-controller="Account">Kayıt ol</a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </nav>
+        </header>
+        <main role="main" class="center">
+            @RenderBody()
+            <!-- FOOTER -->
+            <footer class="container">
+                <br />
+            </footer>
+        </main>
+        <script src="~/lib/jquery/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
+    </body>
+    </html>
+*@
