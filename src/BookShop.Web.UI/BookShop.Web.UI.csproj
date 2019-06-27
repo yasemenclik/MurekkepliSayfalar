@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\img\social-media\" />
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
