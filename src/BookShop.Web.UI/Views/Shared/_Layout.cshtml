@@ -1,4 +1,12 @@
-﻿
+﻿@model BookShop.Web.UI.Models.AccountViewModels.LoginViewModel
+
+@using Microsoft.AspNetCore.Identity
+@using BookShop.Core.Users
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
 <!DOCTYPE html>
 <html lang="tr">
 
@@ -13,13 +21,13 @@
 
     <!-- Bootstrap core CSS -->
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/lib/@@fortawesome/fontawesome-free-webfonts/css/all.min.css" rel="stylesheet" type="text/css">
-
+    <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
 
     <!-- Custom styles for this template -->
     <link href="~/css/agency.min.css" rel="stylesheet">
@@ -34,7 +42,7 @@
             <h5><a class="navbar-brand js-scroll-trigger ml-2" href="#page-top">Mürekkepli Sayfalar</a></h5>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
-                <i class="fas fa-bars"></i>
+                <i class="fa fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
@@ -48,9 +56,22 @@
                         <a class="nav-link js-scroll-trigger" href="#team"> Biz Kimiz? </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="" data-toggle="modal" data-target="#exampleModalCenter">Üye Girişi</a>
-                    </li>
+                    @*<li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#team"> İletişim </a>
+                    </li>*@
+
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <a asp-action="Logout" asp-controller="Account" class="nav-link"> Çıkış!</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="" data-toggle="modal" data-target="#exampleModalCenter"> Giriş! </a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -69,13 +90,40 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    ...
+                <div class="modal-body form-group">
+                    <div class="container">
+                        <div id="login-row" class="row justify-content-center align-items-center">
+                            <div id="login-box" class="col-md-10">
+                                <form asp-controller="Account" asp-action="Login" method="post">
+                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <label asp-for="Username" class="modal-title"></label><br>
+                                        <input asp-for="Username" class="form-control">
+                                        <span asp-validation-for="Username" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Password" class="modal-title"></label><br>
+                                        <input asp-for="Password" class="form-control">
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="remember-me" class="text-info">
+                                            <span>Beni Hatırla</span>
+                                            <span><input id="remember-me" name="remember-me" type="checkbox"></span>
+                                        </label><br>
+
+                                        <input type="submit" class="btn btn-primary" value="Giriş Yap" />
+                                    </div>
+                                    <div id="register-link" class="text-right">
+                                        <a asp-action="Register" asp-controller="Account" class="text-info">Hesabım Yok! :(</a>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+
             </div>
         </div>
     </div>
@@ -109,10 +157,14 @@
 
 
 @*
+
+
     @using Microsoft.AspNetCore.Identity
     @using BookShop.Core.Users
+
     @inject SignInManager<ApplicationUser> SignInManager
     @inject UserManager<ApplicationUser> UserManager
+
     <!doctype html>
     <html lang="tr">
     <head>
@@ -122,7 +174,10 @@
         <meta name="author" content="Elif Kantar - Yasemen Çelik - Gizem Kılıç">
         <meta name="generator" content="BookShop">
         <title>Book Shop</title>
+
         <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+
         <style>
             .bd-placeholder-img {
                 font-size: 1.125rem;
@@ -132,6 +187,7 @@
                 -ms-user-select: none;
                 user-select: none;
             }
+
             @@media (min-width: 768px) {
                 .bd-placeholder-img-lg {
                     font-size: 3.5rem;
@@ -160,11 +216,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Sesli Kitap</a>
                         </li>
+
                     </ul>
                     <form class="form-inline col-md-5 mt-2 mt-md-0">
                         <input class="form-control col-7 mr-sm-4" type="text" placeholder="Hangi ürünü arıyorsunuz?" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ara</button>
                     </form>
+
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
@@ -172,11 +230,13 @@
                                 <li>
                                     <span>Merhaba @User.Identity.Name</span> &nbsp; &nbsp;
                                 </li>
+
                                 <li>
                                     <button type="submit" class="btn btn-danger navbar-btn navbar-link">Çıkış</button>
                                 </li>
                             </ul>
                         </form>
+
                     }
                     else
                     {
@@ -192,8 +252,14 @@
                 </div>
             </nav>
         </header>
+
+
         <main role="main" class="center">
+
+
             @RenderBody()
+
+
             <!-- FOOTER -->
             <footer class="container">
                 <br />
@@ -203,4 +269,7 @@
         <script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
     </body>
     </html>
+
+
 *@
+

@@ -72,8 +72,8 @@ namespace BookShop.Web.UI.Controllers
 
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
@@ -83,6 +83,7 @@ namespace BookShop.Web.UI.Controllers
         //Veritabanına veri ekleyeceğimiz için HttpPost yazıyoruz.
         //Veriyi eşzamanlı olarak (async) getirmesini sağlıyoruz.
         //ValidateAntiForgeryToken; kendisine gönderilen AntiForgeryToken’ı decrypt işleminden geçirerek, validation işlemlerini gerçekleştirmektedir.Eğer validation işlemlerinden geçemezse bu noktada exception’a düşmektedir.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
