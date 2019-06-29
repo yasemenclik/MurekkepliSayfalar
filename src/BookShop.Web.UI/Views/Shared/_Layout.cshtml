@@ -47,29 +47,28 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#services"> Hizmetlerimiz </a>
+                        <a class="nav-link js-scroll-trigger" href="#services">Hizmetlerimiz</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#portfolio"> Kategoriler </a>
+                        <a class="nav-link js-scroll-trigger" href="#portfolio">Kategoriler</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#team"> Biz Kimiz? </a>
+                        <a class="nav-link js-scroll-trigger" href="#team">Biz Kimiz?</a>
                     </li>
-
-                    @*<li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#team"> İletişim </a>
-                    </li>*@
-
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li class="nav-item">
-                            <a asp-action="Logout" asp-controller="Account" class="nav-link"> Çıkış!</a>
+                            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+                                &nbsp; &nbsp;  &nbsp; &nbsp; <button type="submit" class="btn btn-primary btn-lg text-uppercase">Çıkış</button>
+                            </form>
+
                         </li>
+
                     }
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link" href="" data-toggle="modal" data-target="#exampleModalCenter"> Giriş! </a>
+                            <a class="nav-link" href="" data-toggle="modal" data-target="#exampleModalCenter">Üye Girişi</a>
                         </li>
                     }
                 </ul>
@@ -97,25 +96,20 @@
                                 <form asp-controller="Account" asp-action="Login" method="post">
                                     <div asp-validation-summary="All" class="text-danger"></div>
                                     <div class="form-group">
-                                        <label asp-for="Username" class="modal-title"></label><br>
+                                        <label asp-for="Username" class="text-black-50"></label><br>
                                         <input asp-for="Username" class="form-control">
                                         <span asp-validation-for="Username" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label asp-for="Password" class="modal-title"></label><br>
+                                        <label asp-for="Password" class="text-black-50"></label><br>
                                         <input asp-for="Password" class="form-control">
                                         <span asp-validation-for="Password" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="remember-me" class="text-info">
-                                            <span>Beni Hatırla</span>
-                                            <span><input id="remember-me" name="remember-me" type="checkbox"></span>
-                                        </label><br>
-
                                         <input type="submit" class="btn btn-primary" value="Giriş Yap" />
                                     </div>
                                     <div id="register-link" class="text-right">
-                                        <a asp-action="Register" asp-controller="Account" class="text-info">Hesabım Yok! :(</a>
+                                        <a asp-action="Register" asp-controller="Account" class="text-black-50">Hesabım Yok! :(</a>
                                     </div>
 
                                 </form>
@@ -272,4 +266,3 @@
 
 
 *@
-

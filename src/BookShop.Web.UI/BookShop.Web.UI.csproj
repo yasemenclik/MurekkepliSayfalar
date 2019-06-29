@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BookShop.Application\BookShop.Application.csproj" />
     <ProjectReference Include="..\BookShop.EntityFramework\BookShop.EntityFramework.csproj" />
   </ItemGroup>
 
