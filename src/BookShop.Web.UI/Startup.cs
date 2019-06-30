@@ -34,6 +34,8 @@ namespace BookShop.Web.UI
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            
+
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = false;
@@ -42,6 +44,7 @@ namespace BookShop.Web.UI
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 1;
             });
+
 
             services.AddDbContext<ApplicationUserDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
 

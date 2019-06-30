@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <Folder Include="BookListItemServices\Dto\" />
-    <Folder Include="BookListServices\Dto\" />
   </ItemGroup>
 
 </Project>

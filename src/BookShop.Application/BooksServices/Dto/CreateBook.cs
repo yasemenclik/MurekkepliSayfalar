@@ -7,24 +7,21 @@ namespace BookShop.Application.BooksServices.Dto
 {
     public class CreateBook
     {
-      
         [Required]
-        [Display(Name="Kitabın İsmi")]
+        [Display(Name = "Kitap İsmi")]
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Kitabın Yazarı")]
+        [Display(Name = "Kitap Yazarı")]
         public string Author { get; set; }
 
-        [Required]
-        [Display(Name = "Kitabın Açıklaması")]
         [MaxLength(300)]
+        [Required]
+        [Display(Name = "Kitap Özeti")]
         public string Description { get; set; }
 
         [Required]
         [Display(Name = "Oluşturan Kullanıcı")]
         public string CreatorUserId { get; set; }
-        
-       
     }
 }

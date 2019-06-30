@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BookShop.Application.BooksServices.Dto
+namespace BookShop.Application.BookListServices.Dto
 {
-    public class DeleteBook
+    public class UpdateBookList : CreateBookList
     {
         public int Id { get; set; }
     }

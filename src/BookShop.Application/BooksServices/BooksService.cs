@@ -1,21 +1,33 @@
-﻿using BookShop.Application.BooksServices.Dto;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using BookShop.Application.BooksServices.Dto;
 using BookShop.Core.Book;
 using BookShop.EntityFramework.Contexts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookShop.Application.BooksServices
 {
-    public class BooksService: IBooksService
+    public class BooksService : IBooksService
     {
         private ApplicationUserDbContext _context;
         public BooksService(ApplicationUserDbContext context)
         {
             _context = context;
+        }
+
+        public async Task<Books> Get(int id)
+        {
+            var item = await _context.Books.FindAsync(id);
+            return item;
+        }
+
+        public async Task<List<Books>> GetAll()
+        {
+            var list = await _context.Books
+                .ToListAsync();
+            return list;
         }
 
         public async Task<Books> Create(CreateBook input)
@@ -26,28 +38,22 @@ namespace BookShop.Application.BooksServices
             return newBook;
         }
 
-        public Task<Books> Delete(DeleteBook input)
+        public async Task<Books> Update(UpdateBook input)
         {
-            throw new NotImplementedException();
+            var updateBook = await Get(input.Id);
+            updateBook.Name = input.Name;
+            updateBook.Author = input.Author;
+            updateBook.Description = input.Description;
+            _context.Books.Update(updateBook);
+            await _context.SaveChangesAsync();
+            return updateBook;
         }
 
-        public async Task<Books> Get(int id)
+        public async Task Delete(int id)
         {
-            var item = await _context.Books.FindAsync(id);
-
-            return item;
-        }
-
-        public async Task<List<Books>> GetAll()
-        {
-            var list = await _context.Books
-               .ToListAsync();
-            return list;
-        }
-
-        public Task<Books> Update(UpdateBook input)
-        {
-            throw new NotImplementedException();
+            var item = await Get(id);
+            _context.Books.Remove(item);
+            await _context.SaveChangesAsync();
         }
     }
 }

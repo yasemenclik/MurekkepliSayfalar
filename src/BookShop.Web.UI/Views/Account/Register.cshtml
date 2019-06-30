@@ -14,8 +14,8 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/checkout/">
     <!-- Bootstrap core CSS -->
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
 
+    <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -37,8 +37,7 @@
 <body class="bg-light">
     <div class="container">
         <div class="py-5 text-center">
-            <br /><br />
-            <img class="d-block mx-auto mb-4" src="~/img/book-shop.png" alt="" width="200" height="200">
+            <br /><br /><br /><br />
             <h2>Kayıt Ol !</h2>
         </div>
         <div class="row">
@@ -77,6 +76,7 @@
                         <label asp-for="Address"></label>
                         <input asp-for="Address" class="form-control">
                     </div>
+
                     <div class="row">
                         <div class="col-md-5 mb-3">
                             <label asp-for="Country"></label>
@@ -98,10 +98,14 @@
                         </div>
                     </div>
                     <hr class="mb-4">
+
+
                     <button class="btn btn-primary btn-lg btn-block" type="submit">Kayıt Ol</button>
                 </form>
+                <br /><br />
             </div>
         </div>
+
     </div>
     <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="~/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>

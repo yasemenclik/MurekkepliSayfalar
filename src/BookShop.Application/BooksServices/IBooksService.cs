@@ -14,6 +14,6 @@ namespace BookShop.Application.BooksServices
 
         Task<Books> Create(CreateBook input);
         Task<Books> Update(UpdateBook input);
-        Task<Books> Delete(DeleteBook input);
+        Task Delete(int id);
     }
 }
