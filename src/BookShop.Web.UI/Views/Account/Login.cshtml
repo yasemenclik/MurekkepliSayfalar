@@ -3,6 +3,7 @@
     ViewData["Title"] = "Login";
 }
 
+<br /><br />
 <div id="login">
     <h3 class="text-center text-white pt-5">Giriş Ekranı</h3>
     <div class="container">
@@ -23,8 +24,9 @@
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label for="remember-me" class="text-info"><span>Beni Hatırla</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
-                            <input type="submit" name="submit" class="btn btn-info btn-md" value="Giriş">
+                            <label for="remember-me" class="text-info"><span>Beni Hatırla</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br><br>
+                           
+                            <input type="submit" name="submit" class="btn btn-warning btn-lg text-white" value="Giriş">
                         </div>
                         <div id="register-link" class="text-right">
                             <a asp-action="Register" asp-controller="Account" class="text-info">Hesabım Yok! :(</a>
