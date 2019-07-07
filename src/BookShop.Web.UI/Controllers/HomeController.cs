@@ -12,5 +12,9 @@ namespace BookShop.Web.UI.Controllers
         {
             return View();
         }
+        public IActionResult About()
+        {
+            return View();
+        }
     }
 }

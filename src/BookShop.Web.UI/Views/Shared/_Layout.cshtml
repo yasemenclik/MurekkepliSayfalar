@@ -1,23 +1,14 @@
-﻿@model BookShop.Web.UI.Models.AccountViewModels.LoginViewModel
-
-@using Microsoft.AspNetCore.Identity
-@using BookShop.Core.Users
-
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
-
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 
 <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content=" Kitap Blogu ">
+    <meta name="author" content=" Yasemen Çelik - Elif Kantar - Gizem Kılıç ">
 
-    <title>Agency - Start Bootstrap Theme</title>
+    <title> Mürekkepli Sayfalar </title>
 
     <!-- Bootstrap core CSS -->
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -47,36 +38,21 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#services"> Hizmetlerimiz </a>
+                        <a class="nav-link js-scroll-trigger" href="#services">Hizmetlerimiz</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#portfolio"> Kategoriler </a>
+                        <a class="nav-link js-scroll-trigger" href="#portfolio">Kategoriler</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#team"> Biz Kimiz? </a>
+                        <a class="nav-link js-scroll-trigger" href="#team">Biz Kimiz?</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#profile"> Hesabım </a>
+                        <a class="nav-link js-scroll-trigger" href="#profile">Hesabım</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#manage"> Yönetim </a>
+                        <a class="nav-link js-scroll-trigger" href="#manage">Yönetim</a>
                     </li>
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                        <li class="nav-item">
-                            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
-                                &nbsp; &nbsp;  &nbsp; &nbsp; <button type="submit" class="btn btn-primary btn-lg text-uppercase ">Çıkış</button>
-                            </form>
-
-                        </li>
-
-                    }
-                    else
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" href="" data-toggle="modal" data-target="#exampleModalCenter">Üye Girişi</a>
-                        </li>
-                    }
+                    @await Html.PartialAsync("_LoginPartial")
                 </ul>
             </div>
         </div>
@@ -85,54 +61,54 @@
 
     @RenderBody()
 
-     <!-- Footer -->
-
+    <!-- Footer -->
     <footer class="footer"></footer>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Üye Girişi</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body form-group">
-                    <div class="container">
-                        <div id="login-row" class="row justify-content-center align-items-center">
-                            <div id="login-box" class="col-md-10">
-                                <form asp-controller="Account" asp-action="Login" method="post">
-                                    <div asp-validation-summary="All" class="text-danger"></div>
-                                    <div class="form-group">
-                                        <label asp-for="Username" class="text-black-50"></label><br>
-                                        <input asp-for="Username" class="form-control">
-                                        <span asp-validation-for="Username" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Password" class="text-black-50"></label><br>
-                                        <input asp-for="Password" class="form-control">
-                                        <span asp-validation-for="Password" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" class="btn btn-primary" value="Giriş Yap" />
-                                    </div>
-                                    <div id="register-link" class="text-right">
-                                        <a asp-action="Register" asp-controller="Account" class="text-black-50">Hesabım Yok! :(</a>
-                                    </div>
 
-                                </form>
+
+
+    @*
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Üye Girişi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body form-group">
+                        <div class="container">
+                            <div id="login-row" class="row justify-content-center align-items-center">
+                                <div id="login-box" class="col-md-10">
+                                    <form asp-controller="Account" asp-action="Login" method="post">
+                                        <div asp-validation-summary="All" class="text-danger"></div>
+                                        <div class="form-group">
+                                            <label asp-for="Username" class="text-black-50"></label><br>
+                                            <input asp-for="Username" class="form-control">
+                                            <span asp-validation-for="Username" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Password" class="text-black-50"></label><br>
+                                            <input asp-for="Password" class="form-control">
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary" value="Giriş Yap" />
+                                        </div>
+                                        <div id="register-link" class="text-right">
+                                            <a asp-action="Register" asp-controller="Account" class="text-black-50">Hesabım Yok! :(</a>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
-
-
+    *@
 
 
     <!-- Bootstrap core JavaScript -->
@@ -161,14 +137,10 @@
 
 
 @*
-
-
     @using Microsoft.AspNetCore.Identity
     @using BookShop.Core.Users
-
     @inject SignInManager<ApplicationUser> SignInManager
     @inject UserManager<ApplicationUser> UserManager
-
     <!doctype html>
     <html lang="tr">
     <head>
@@ -178,10 +150,7 @@
         <meta name="author" content="Elif Kantar - Yasemen Çelik - Gizem Kılıç">
         <meta name="generator" content="BookShop">
         <title>Book Shop</title>
-
         <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-
-
         <style>
             .bd-placeholder-img {
                 font-size: 1.125rem;
@@ -191,7 +160,6 @@
                 -ms-user-select: none;
                 user-select: none;
             }
-
             @@media (min-width: 768px) {
                 .bd-placeholder-img-lg {
                     font-size: 3.5rem;
@@ -220,13 +188,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Sesli Kitap</a>
                         </li>
-
                     </ul>
                     <form class="form-inline col-md-5 mt-2 mt-md-0">
                         <input class="form-control col-7 mr-sm-4" type="text" placeholder="Hangi ürünü arıyorsunuz?" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ara</button>
                     </form>
-
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
@@ -234,13 +200,11 @@
                                 <li>
                                     <span>Merhaba @User.Identity.Name</span> &nbsp; &nbsp;
                                 </li>
-
                                 <li>
                                     <button type="submit" class="btn btn-danger navbar-btn navbar-link">Çıkış</button>
                                 </li>
                             </ul>
                         </form>
-
                     }
                     else
                     {
@@ -256,14 +220,8 @@
                 </div>
             </nav>
         </header>
-
-
         <main role="main" class="center">
-
-
             @RenderBody()
-
-
             <!-- FOOTER -->
             <footer class="container">
                 <br />
@@ -273,6 +231,4 @@
         <script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
     </body>
     </html>
-
-
 *@

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookShop.Application.BooksServices.Dto;
@@ -25,8 +26,12 @@ namespace BookShop.Application.BooksServices
 
         public async Task<List<Books>> GetAll()
         {
-            var list = await _context.Books
+            List<Books> list = await _context.Books
                 .ToListAsync();
+            if (!(list.Count() > 0))
+            {
+                list = new List<Books>();
+            }
             return list;
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BookShop.Application.BooksServices;
 using BookShop.Application.BooksServices.Dto;
+using BookShop.Core.Book;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,8 @@ namespace BookShop.Web.UI.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            return View(await _booksService.GetAll());
+            List<Books> model = await _booksService.GetAll();
+            return View(model);
             
         }
         public ActionResult Create()
